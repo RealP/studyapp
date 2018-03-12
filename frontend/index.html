@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+
+<body>
+    <script src="controllers/mainControl.js"></script>
+    <div ng-app="notes_app" class="notes_app">
+        <div ng-controller="myCtrl">
+            <form id="load_user" ng-submit="loadUser()" style="display: inline-block;">
+                Load/Create user
+                <input type="text" value="paul" ng-model="user_id"></input>
+                <input type="submit">
+            </form>
+            <h1>{{errortext}}</h1>
+            <div id="create_note_box_container">
+                <div id="create_note_box" ng-click="openNoteEditor()">
+                    Create New Flash Card
+                </div>
+            </div>
+            <div id="main_note_area">
+                <div ng-repeat="x in notes">
+                    <div class="card">
+                        <div class="card-title">
+                            {{x.title}}
+                            <span ng-click="removeNote($index)" class="card-delete">&times;</span>
+                        </div>
+                        <div class="card-content">
+                            {{x.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- The modal add note form -->
+            <form id="add_note_overlay" ng-submit="createNewNote()">
+                <div class="add_note_content">
+                    <div class="add_note-header">
+                        <span class="close" ng-click="closeCreateNote()">&times;</span>
+                        <input type="text" id="new_note_title" name="note_title" placeholder="Set a title" ng-model="note_title"></input>
+                    </div>
+                    <div class="add_note-body">
+                        <textarea class="note_body_content" placeholder="Some other text..." ng-model="note_body_content"></textarea>
+                    </div>
+                    <div class="add_note_footer">
+                        <input type="submit" id="add_note_submit" value="Submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
